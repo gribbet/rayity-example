@@ -6,5 +6,12 @@ module.exports = {
 	},
 	resolve: {
 		extensions: [".js"]
+	},
+	module: {
+		rules: [{
+			enforce: "pre",
+			test: /\.js$/,
+			loader: "source-map-loader"
+		}]
 	}
 };
