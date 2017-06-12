@@ -1,0 +1,19 @@
+{
+  "name": "typescript-raymarch-test",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "scripts": {
+		"start": "webpack-dev-server --content-base ./public"
+	},
+  "dependencies": {
+    "typescript-raymarch": "file:/Users/Graham/Projects/typescript-raymarch"
+  },
+  "devDependencies": {
+    "raw-loader": "^0.5.1",
+    "ts-loader": "^2.1.0",
+    "typescript": "^2.3.4",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
+  }
+}
