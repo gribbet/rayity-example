@@ -8,7 +8,7 @@ const scene = createScene([
 				emissivity: value(1, 1, 1)
 			})),
 		entity(
-			translate(value(-1, 0, 0), mandelbulb()),
+			translate(value(-10, 0, 0), mandelbulb()),
 			material({
 				color: value(0.5, 0.5, 0.5)
 			}))
