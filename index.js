@@ -1,4 +1,4 @@
-import {entity, createScene, scale, value, unitSphere, material, translate, mandelbulb, createViewer} from "typescript-raymarch";
+import {createScene, createViewer, entity, mandelbulb, material, scale, translate, unitSphere, value} from "traymarch";
 
 const scene = createScene([
 		entity(
