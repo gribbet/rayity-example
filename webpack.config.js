@@ -9,6 +9,10 @@ module.exports = {
 	},
 	module: {
 		rules: [{
+			enforce: "pre",
+			test: /\.js$/,
+			loader: "source-map-loader"
+		}, {
 			test: /\.ts$/,
 			loader: "ts-loader"
 		}]
