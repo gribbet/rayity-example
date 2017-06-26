@@ -1,7 +1,7 @@
 import {
 	createViewer,
 	difference,
-	intersection,
+	intersection, mandelbulb,
 	material,
 	model,
 	mouseCamera,
@@ -12,75 +12,59 @@ import {
 	unitBox,
 	unitCylinder,
 	unitSphere,
-	value
+	value, sierpinski, rotateX, twistZ, rotateY, rotateZ, repeat, wrapX, twistY, Shape, torus, union
 } from "traymarch";
 
 createViewer(document.body, scene({
 	camera: mouseCamera({
 		fieldOfView: value(60 / 180 * Math.PI),
-		distance: value(10),
+		distance: value(20),
 		aperture: value(0.1)
 	}),
-	entities: [
+	models: [
 		model(
-			plane(value(0, 1, 0), value(1)),
-			material({
-				color: `vec3(0.7, 0.7, 0.7) * mod(floor(0.5 * sin(p.x * 2.0) + 1.0) + floor(0.5 * sin(p.z * 2.0) + 1.0), 2.0) + vec3(0.2, 0.2, 0.2)`
-			})),
-		model(
-			plane(value(0, -1, 0), value(10)),
-			material({
-				emissivity: value(5, 5, 5)
-			})),
-		model(
-			translate(value(2, 0, -2),
-				difference(
-					unitBox(),
-					translate(value(0, 0.2, 0),
-						scale(value(0.9), unitBox())))),
-			material({
-				transmittance: value(0.95),
-				smoothness: value(0.99),
-				color: value(0.7, 0.9, 0.9),
-				refraction: value(2)
-			})),
-		model(
-			translate(value(-2, 0, 2),
-				intersection(
-					difference(
-						unitCylinder(),
-						intersection(
-							scale(value(0.9),
-								unitCylinder()),
-							plane(value(0, -1, 0), value(-0.8)))),
-					unitBox())),
-			material({
-				transmittance: value(0.98),
-				smoothness: value(0.9995),
-				color: value(0.9, 0.5, 0.5),
-				refraction: value(1.4)
-			})),
-		model(
-			translate(value(2, 0, 2),
-				unitBox()),
-			material({
-				transmittance: value(0.9),
-				scatter: value(0.1),
-				color: value(0.5, 1, 0.5)
-			})),
-		model(
-			translate(value(-2, 0, -2),
+			scale(value(1000),
 				unitSphere()),
 			material({
-				color: value(1, 1, 0.5),
-				smoothness: value(0.99)
+				emissivity: value(2, 2, 2)
+			})),
+		model(
+			scale(value(2),
+				unitSphere()),
+			material({
+				emissivity: value(200, 200, 200)
+			})),
+		model(
+			rotateY(value(0.7),
+				rotateZ(value(0.4),
+					rotateX(value(0.2),
+						repeat(value(2, 2, 2),
+							intersection(
+								union(
+									union(
+										translate(value(1, 0, 1),
+											torus()),
+										translate(value(-1, 1, 0),
+											rotateX(value(Math.PI / 2),
+												torus()))),
+									translate(value(0, -1, -1),
+										rotateZ(value(Math.PI / 2),
+											torus()))),
+								unitBox()))))),
+			material({
+				transmittance: value(0.99),
+				scatter: value(0.02),
+				refraction: value(2),
+				smoothness: value(0.9),
+				color: value(0.5, 0.8, 0.9)
 			}))
 	]
 }), {
-	epsilon: 1e-5,
-	steps: 150,
-	bounces: 20,
-	iterations: 5
-});
-
+		width: 128,
+		height: 128,
+		epsilon: 1e-4,
+		steps: 150,
+		bounces: 40,
+		iterations: 4
+	});
 
