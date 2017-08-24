@@ -2036,9 +2036,9 @@ tough-cookie@~2.3.0:
   dependencies:
     punycode "^1.4.1"
 
-"traymarch@git+https://github.com/gribbet/traymarch.git":
+"rayity@git+https://github.com/gribbet/rayity.git":
   version "0.1.0"
-  resolved "git+https://github.com/gribbet/traymarch.git#6f8812ce1062efedebdde6eb9b75ae1388c74e70"
+  resolved "git+https://github.com/gribbet/rayity.git#6f8812ce1062efedebdde6eb9b75ae1388c74e70"
   dependencies:
     typescript "^2.3.2"
 

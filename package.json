@@ -1,5 +1,5 @@
 {
-	"name": "traymarch-example",
+	"name": "rayity-example",
 	"version": "1.0.0",
 	"main": "index.js",
 	"license": "MIT",
@@ -13,6 +13,6 @@
 		"webpack-dev-server": "^2.4.5"
 	},
 	"dependencies": {
-		"traymarch": "git+https://github.com/gribbet/traymarch.git"
+		"rayity": "git+https://github.com/gribbet/rayity.git"
 	}
 }
