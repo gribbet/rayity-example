@@ -19,58 +19,58 @@ function skull(): Shape {
 	let skull =
 		translate(value(0, 0.05, 0),
 			spheroid((p: Expression) =>
-				expression(`0.35 * 0.95 * cos(cos((${p}.y + 0.05) * 11.0) * ${p}.z * 2.3)`)));
+				expression(`0.333 * cos(cos(${p}.y * 11.0 + 0.55) * ${p}.z * 2.3)`)));
 
 	const globeFront = translate(
 		value(0.1, 0.23, 0),
-		scale(value(2.0 * 0.35 * .82), sphere()));
+		scale(value(0.574), sphere()));
 	skull = blend(value(0.09), skull, globeFront);
 
 	const globeBack = translate(
 		value(-0.1, 0.24, 0),
-		scale(value(2.0 * 0.35 * .82), sphere()));
+		scale(value(0.574), sphere()));
 	skull = blend(value(0.09), skull, globeBack);
 
 	const eyeBrow = spheroid((p: Expression) =>
-		expression(`0.35 * 0.36 * cos((${p}.y + 0.07) * 7.0)`));
+		expression(`0.126 * cos(${p}.y * 7.0 + 0.49)`));
 	const eyeBrows = union(
-		translate(value(.24, 0.07, 0.1), eyeBrow),
-		translate(value(.24, 0.07, -0.1), eyeBrow));
+		translate(value(0.24, 0.07, 0.1), eyeBrow),
+		translate(value(0.24, 0.07, -0.1), eyeBrow));
 	skull = blend(value(0.02), skull, eyeBrows);
 
 	const lateralHole = spheroid((p: Expression) =>
-		expression(`0.35 * 0.28 * cos((${p}.x + 0.15) * 0.59)`))
+		expression(`0.098 * cos(${p}.x * 0.59 + 0.089)`))
 	const lateralHoles = union(
 		translate(value(0.15, -0.01, 0.31), lateralHole),
 		translate(value(0.15, -0.01, -0.31), lateralHole));
 	skull = blend2(value(0.02), skull, lateralHoles);
 
 	const cheekBones = union(
-		translate(value(.22, -.13, .18),
-			scale(value(2.0 * 0.35 * 0.11), sphere())),
-		translate(value(.22, -.13, -.18),
-			scale(value(2.0 * 0.35 * 0.11), sphere())));
-	skull = blend(value(0.02), skull, cheekBones);
+		translate(value(0.22, -0.13, 0.18),
+			scale(value(0.077), sphere())),
+		translate(value(0.22, -0.13, -0.18),
+			scale(value(0.077), sphere())));
+	skull = blend(value(0.04), skull, cheekBones);
 
 	const inside = blend(value(0.02),
 		blend(value(0.02),
 			blend(value(0.02),
 				translate(value(0, 0.05, 0),
 					spheroid((p: Expression) =>
-						expression(`0.35 * 0.90 * cos(cos((${p}.y + 0.05) * 11.0) * ${p}.z * 2.3)`))),
-				translate(value(.10, 0.23, 0.00),
-					scale(value(2.0 * 0.35 * 0.73),
+						expression(`0.315 * cos(cos(${p}.y * 11.0 + 0.55) * ${p}.z * 2.3)`))),
+				translate(value(0.10, 0.23, 0),
+					scale(value(0.511),
 						sphere()))),
-			translate(value(-.1, 0.24, 0.00),
-				scale(value(2.0 * 0.35 * 0.73),
+			translate(value(-0.1, 0.24, 0),
+				scale(value(0.511),
 					sphere()))),
-		translate(value(.0, 0.24, 0.00),
-			scale(value(2.0 * 0.35 * 0.73),
+		translate(value(0, 0.24, 0),
+			scale(value(0.511),
 				sphere())));
 	skull = blend2(value(0.02), skull, inside);
 
 	const eyeBall = spheroid((p: Expression) =>
-		expression(`0.35 * 0.28 * cos((${p}.y - 0.04) * 10.0)`));
+		expression(`0.098 * cos(${p}.y * 10.0 - 0.04)`));
 	const eyeBalls = union(
 		translate(value(0.32, -0.04, 0.140), eyeBall),
 		translate(value(0.32, -0.04, -0.140), eyeBall));
@@ -78,80 +78,83 @@ function skull(): Shape {
 
 	let nose = translate(
 		value(0.22, -0.05, 0),
-		spheroid((p: Expression) => expression(`0.35 * 0.35 * cos(sin((${p}.y - 0.05) * 22.0) * ${p}.z * 24.0)`)));
+		spheroid((p: Expression) =>
+			expression(`0.123 * cos(sin(${p}.y * 22.0 - 1.1) * ${p}.z * 24.0)`)));
 	nose = blend2(value(0.02),
 		nose,
-		translate(value(.32, -0.04, .140),
-			spheroid((p: Expression) => expression(`0.35 * 0.35 * cos((${p}.y - 0.04) * 10.0)`))));
+		translate(value(0.32, -0.04, 0.140),
+			spheroid((p: Expression) =>
+				expression(`0.123 * cos(${p}.y * 10.0 - 0.4)`))));
 	nose = blend2(value(0.02),
 		nose,
-		translate(value(.32, -0.04, -.140),
-			spheroid((p: Expression) => expression(`0.35 * 0.35 * cos((${p}.y - 0.04) * 10.0)`))));
+		translate(value(0.32, -0.04, -0.140),
+			spheroid((p: Expression) =>
+				expression(`0.123 * cos(${p}.y * 10.0 - 0.4)`))));
 	nose = blend2(value(0.02),
 		nose,
 		translate(value(0, 0.05, 0),
 			spheroid((p: Expression) =>
-				expression(`0.35 * 0.9 * cos(cos((${p}.y + 0.05) * 11.0) * ${p}.z * 2.3)`))));
+				expression(`0.32 * cos(cos(${p}.y * 11.0 + 0.5) * ${p}.z * 2.3)`))));
 	skull = blend(value(0.015), skull, nose);
 
 	skull = blend2(value(0.002),
 		skull,
-		translate(value(.238, -0.09, 0),
+		translate(value(0.238, -0.09, 0),
 			spheroid((p: Expression) =>
-				expression(`0.35 * 0.3 * cos(sin((${p}.y - 0.09) * 18.0) * ${p}.z * 29.0)`))));
+				expression(`0.11 * cos(sin(${p}.y * 18.0 - 1.62) * ${p}.z * 29.0)`))));
 
 	skull = blend2(value(0.01),
 		skull,
-		translate(value(-.15, -0.97, .0),
-			scale(value(2.0 * 0.35 * 2.5),
+		translate(value(-0.15, -0.97, 0),
+			scale(value(1.75),
 				sphere())));
 
 
 	let upperJaw = translate(value(0.13, -0.26, 0),
-		scale(value(2 * 0.35 * 0.45),
+		scale(value(0.315),
 			sphere()));
 	upperJaw = blend2(value(0.01),
 		upperJaw,
 		translate(value(0.125, -0.3, 0),
-			scale(value(2 * 0.35 * 0.4),
+			scale(value(0.28),
 				sphere())));
 	upperJaw = blend2(value(0.03),
 		upperJaw,
 		translate(value(-0.2, -0.1, 0),
-			scale(value(2 * 0.35 * 0.9),
+			scale(value(0.63),
 				sphere())));
 	upperJaw = blend2(value(0.03),
 		upperJaw,
 		translate(value(0.13, -0.543, 0),
-			scale(value(2 * 0.35 * 0.9),
+			scale(value(0.63),
 				sphere())));
 	upperJaw = difference(
 		upperJaw,
 		translate(value(0, 0.02, 0),
-			spheroid((p: Expression) => expression(`0.35 * 0.90 * cos(cos((${p}.y + 0.02) * 11.) * ${p}.z * 2.3)`))));
+			spheroid((p: Expression) =>
+				expression(`0.315 * cos(cos(${p}.y * 11.0 + 0.22) * ${p}.z * 2.3)`))));
 	skull = blend(value(0.04),
 		skull,
 		upperJaw);
 
 	let lowerJaw = translate(value(0.1, -0.32, 0),
-		scale(value(2.0 * 0.35 * 0.43),
+		scale(value(0.301),
 			sphere()));
 	lowerJaw = blend2(value(0.02),
 		lowerJaw,
 		translate(value(0.1, -0.32, 0),
-			scale(value(2 * 0.35 * 0.37),
+			scale(value(0.259),
 				sphere())));
 	lowerJaw = blend2(value(0.02),
 		lowerJaw,
 		translate(value(0.1, -0.034, 0),
-			scale(value(2 * 0.35 * 1.03),
+			scale(value(0.721),
 				sphere())));
 	lowerJaw = blend2(value(0.02),
 		lowerJaw,
 		translate(value(0, -0.4, 0),
-			scale(value(2 * 0.35 * 0.35),
+			scale(value(0.245),
 				sphere())));
-
 
 	function test(
 		x: (p: Expression) => Expression,
@@ -179,71 +182,71 @@ function skull(): Shape {
 	lowerJaw = difference(
 		lowerJaw,
 		translate(value(0, 0.153, 0.2),
-			scale(value(2 * 0.35 * 0.85),
+			scale(value(0.595),
 				sphere())));
 	lowerJaw = difference(
 		lowerJaw,
 		translate(value(0, 0.153, -0.2),
-			scale(value(2 * 0.35 * 0.85),
+			scale(value(0.595),
 				sphere())));
 	lowerJaw = blend(
 		value(0.07),
 		lowerJaw,
 		translate(value(0.2, -0.45, 0.05),
-			scale(value(2 * 0.35 * 0.05),
+			scale(value(0.035),
 				sphere())));
 	lowerJaw = blend(
 		value(0.07),
 		lowerJaw,
 		translate(value(0.2, -0.45, -0.05),
-			scale(value(2 * 0.35 * 0.05),
+			scale(value(0.035),
 				sphere())));
 	skull = blend(value(0.02), skull, lowerJaw);
 
 	let teeth = translate(value(0.26, -0.29, 0.018),
-		scale(value(2 * 0.35 * 0.053), sphere()));
+		scale(value(0.0371), sphere()));
 	teeth = union(teeth,
 		translate(value(0.26, -0.29, -0.018),
-			scale(value(2 * 0.35 * 0.053), sphere())));
+			scale(value(0.0371),
+				sphere())));
 
-	teeth = union(teeth, translate(value(.25, -.29, .05), scale(value(2 * 0.35 * .05), sphere())));;
-	teeth = union(teeth, translate(value(.25, -.29, -.05), scale(value(2 * 0.35 * .05), sphere())));;
-	teeth = union(teeth, translate(value(.235, -.29, .08), scale(value(2 * 0.35 * .05), sphere())));;
-	teeth = union(teeth, translate(value(.235, -.29, -.08), scale(value(2 * 0.35 * .05), sphere())));;
-	teeth = union(teeth, translate(value(.215, -.28, .1), scale(value(2 * 0.35 * .05), sphere())));;
-	teeth = union(teeth, translate(value(.215, -.28, -.1), scale(value(2 * 0.35 * .05), sphere())));;
-	teeth = difference(teeth, translate(value(.16, -.35, .0), scale(value(2 * 0.35 * .33), sphere())));;
-	teeth = union(teeth, translate(value(.18, -.28, .115), scale(value(2 * 0.35 * .05), sphere())));;
-	teeth = union(teeth, translate(value(.18, -.28, -.115), scale(value(2 * 0.35 * .05), sphere())));;
-	teeth = union(teeth, translate(value(.14, -.28, .115), scale(value(2 * 0.35 * .06), sphere())));;
-	teeth = union(teeth, translate(value(.14, -.28, -.115), scale(value(2 * 0.35 * .06), sphere())));;
-	teeth = union(teeth, translate(value(.11, -.28, .115), scale(value(2 * 0.35 * .06), sphere())));;
-	teeth = union(teeth, translate(value(.11, -.28, -.115), scale(value(2 * 0.35 * .06), sphere())));;
-	teeth = union(teeth, translate(value(.08, -.28, .115), scale(value(2 * 0.35 * .06), sphere())));;
-	teeth = union(teeth, translate(value(.08, -.28, -.115), scale(value(2 * 0.35 * .06), sphere())));;
+	teeth = union(teeth, translate(value(0.25, -0.29, 0.05), scale(value(0.035), sphere())));;
+	teeth = union(teeth, translate(value(0.25, -0.29, -0.05), scale(value(0.035), sphere())));;
+	teeth = union(teeth, translate(value(0.235, -0.29, 0.08), scale(value(0.035), sphere())));;
+	teeth = union(teeth, translate(value(0.235, -0.29, -0.08), scale(value(0.035), sphere())));;
+	teeth = union(teeth, translate(value(0.215, -0.28, 0.1), scale(value(0.035), sphere())));;
+	teeth = union(teeth, translate(value(0.215, -0.28, -0.1), scale(value(0.035), sphere())));;
+	teeth = difference(teeth, translate(value(0.16, -0.35, 0), scale(value(0.231), sphere())));;
+	teeth = union(teeth, translate(value(0.18, -0.28, 0.115), scale(value(0.035), sphere())));;
+	teeth = union(teeth, translate(value(0.18, -0.28, -0.115), scale(value(0.035), sphere())));;
+	teeth = union(teeth, translate(value(0.14, -0.28, 0.115), scale(value(0.042), sphere())));;
+	teeth = union(teeth, translate(value(0.14, -0.28, -0.115), scale(value(0.042), sphere())));;
+	teeth = union(teeth, translate(value(0.11, -0.28, 0.115), scale(value(0.042), sphere())));;
+	teeth = union(teeth, translate(value(0.11, -0.28, -0.115), scale(value(0.042), sphere())));;
+	teeth = union(teeth, translate(value(0.08, -0.28, 0.115), scale(value(0.042), sphere())));;
+	teeth = union(teeth, translate(value(0.08, -0.28, -0.115), scale(value(0.042), sphere())));;
 	skull = blend(value(0.03),
 		skull,
 		teeth);
 
-	teeth = translate(value(.23, -.34, .018),
-		scale(value(2 * 0.35 * 0.053), sphere()));
-	teeth = union(teeth, translate(value(.23, -.34, -.018), scale(value(2 * 0.35 * .05), sphere())));;
-	teeth = union(teeth, translate(value(.22, -.34, -.048), scale(value(2 * 0.35 * .053), sphere())));;
-	teeth = union(teeth, translate(value(.22, -.34, .048), scale(value(2 * 0.35 * .053), sphere())));;
-	teeth = union(teeth, translate(value(.20, -.34, -.078), scale(value(2 * 0.35 * .053), sphere())));;
-	teeth = union(teeth, translate(value(.20, -.34, .078), scale(value(2 * 0.35 * .053), sphere())));;
-	teeth = union(teeth, translate(value(.17, -.35, -.098), scale(value(2 * 0.35 * .053), sphere())));;
-	teeth = union(teeth, translate(value(.17, -.35, .098), scale(value(2 * 0.35 * .053), sphere())));;
-	teeth = union(teeth, translate(value(.14, -.35, -.11), scale(value(2 * 0.35 * .053), sphere())));;
-	teeth = union(teeth, translate(value(.14, -.35, .11), scale(value(2 * 0.35 * .053), sphere())));;
-	teeth = union(teeth, translate(value(.11, -.35, -.11), scale(value(2 * 0.35 * .053), sphere())));;
-	teeth = union(teeth, translate(value(.11, -.35, .11), scale(value(2 * 0.35 * .053), sphere())));;
-	teeth = union(teeth, translate(value(.08, -.35, -.11), scale(value(2 * 0.35 * .053), sphere())));;
-	teeth = union(teeth, translate(value(.08, -.35, .11), scale(value(2 * 0.35 * .053), sphere())));;
+	teeth = translate(value(0.23, -0.34, 0.018),
+		scale(value(0.0371), sphere()));
+	teeth = union(teeth, translate(value(0.23, -0.34, -0.018), scale(value(0.035), sphere())));;
+	teeth = union(teeth, translate(value(0.22, -0.34, -0.048), scale(value(0.0353), sphere())));;
+	teeth = union(teeth, translate(value(0.22, -0.34, 0.048), scale(value(0.0353), sphere())));;
+	teeth = union(teeth, translate(value(0.20, -0.34, -0.078), scale(value(0.0353), sphere())));;
+	teeth = union(teeth, translate(value(0.20, -0.34, 0.078), scale(value(0.0353), sphere())));;
+	teeth = union(teeth, translate(value(0.17, -0.35, -0.098), scale(value(0.0353), sphere())));;
+	teeth = union(teeth, translate(value(0.17, -0.35, 0.098), scale(value(0.0353), sphere())));;
+	teeth = union(teeth, translate(value(0.14, -0.35, -0.11), scale(value(0.0353), sphere())));;
+	teeth = union(teeth, translate(value(0.14, -0.35, 0.11), scale(value(0.0353), sphere())));;
+	teeth = union(teeth, translate(value(0.11, -0.35, -0.11), scale(value(0.0353), sphere())));;
+	teeth = union(teeth, translate(value(0.11, -0.35, 0.11), scale(value(0.0353), sphere())));;
+	teeth = union(teeth, translate(value(0.08, -0.35, -0.11), scale(value(0.0353), sphere())));;
+	teeth = union(teeth, translate(value(0.08, -0.35, 0.11), scale(value(0.0353), sphere())));;
 	skull = blend(value(0.025),
 		skull,
 		teeth);
-
 
 	return skull;
 }
@@ -278,8 +281,8 @@ createViewer(
 			})
 		]
 	}), options({
-		width: 256,
-		height: 256,
+		width: 512,
+		height: 512,
 		epsilon: 1e-4,
 		steps: 100,
 		bounces: 4,
