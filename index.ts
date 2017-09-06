@@ -1,6 +1,6 @@
 import {
 	camera,
-	createViewer,
+	viewer,
 	expression,
 	material,
 	model,
@@ -15,10 +15,10 @@ import {
 	sphere,
 	spotlight,
 	translate, rotateZ,
-	value,
+	value, cube
 } from 'rayity/lib';
 
-createViewer(
+viewer(
 	document.body,
 	scene({
 		air: material({
@@ -26,35 +26,17 @@ createViewer(
 		}),
 		camera: orbit({
 			fieldOfView: value(60 / 180 * Math.PI),
-			distance: value(1.1),
-			aperture: value(0.1),
+			radius: value(1.1),
+			aperture: value(0.02),
 			target: value(0),
 			offset: value(-0.35, -0.2),
 			focalFactor: value(0.75)
 		}),
 		models: [
 			model({
-				shape: scale(value(1000),
-					sphere()),
-				material: spotlight({
-					color: value(0),
-					spread: value(1),
-					ambient: value(1)
-				})
-			}),
-			/*model({
-				shape: translate(value(-0.15, 0.15, 0), 
-					scale(value(0.25), 
-					sphere())),
+				shape: scale(value(0.2), sphere()),
 				material: material({
-					color: value(0),
-					emissivity: value(30)
-				})
-			}),*/
-			model({
-				shape: plane(value(0, 1, 0), value(0.28)),
-				material: material({
-					color: value(0.5, 0.5, 0.8),
+					emissivity: value(2)
 				})
 			}),
 			model({
@@ -62,19 +44,22 @@ createViewer(
 					skull()),
 				material: material({
 					color: value(0.899, 0.898, 0.897),
-					//smoothness: value(0.9)
+					transmittance: value(0.99),
+					smoothness: value(0.5),
+					refraction: value(1.8),
 				})
 			})
 		]
 	}), options({
-		width: 256,
-		height: 256,
+		width: 512,
+		height: 512,
 		epsilon: 1e-5,
 		steps: 80,
-		bounces: 8,
+		bounces: 20,
 		iterations: 1,
 		cheapNormals: false,
 		memory: 1.0,
-		stepFactor: 0.6
+		stepFactor: 0.6,
+		gamma: 3
 	}));
 
