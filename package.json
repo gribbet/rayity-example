@@ -4,7 +4,7 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"start": "webpack-dev-server --content-base ./public"
+		"start": "webpack-dev-server --content-base ./public --host 0.0.0.0 --disable-host-check"
 	},
 	"devDependencies": {
 		"source-map-loader": "^0.2.1",
